@@ -24,15 +24,12 @@ describe("src/index.ts", function () {
         age: 13
       `
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   examplejs_print(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  assert.equal(examplejs_printLines.join("\n"), "compile:<b>tom - 13</b>"); examplejs_printLines = [];
+  assert.equal(examplejs_printLines.join("\n"), "<b>tom - 13</b>"); examplejs_printLines = [];
   });
           
-  it("processor():execImport is object & rework is No", function () {
+  it("processor():execImport is object", function () {
     examplejs_printLines = [];
   let attrs = {
     data: '#name',
@@ -45,9 +42,6 @@ describe("src/index.ts", function () {
         age: 13,
       }
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   examplejs_print(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
   assert.equal(examplejs_printLines.join("\n"), "<b>tom - 13</b>"); examplejs_printLines = [];
@@ -55,18 +49,10 @@ describe("src/index.ts", function () {
           
   it("processor():data is undefined", function () {
     examplejs_printLines = [];
-  let attrs = {
-  }
-  let scope = {
-    execImport: function (importion) {
-      return importion
-    },
-    compile: function (content) {
-      return 'compile:' + content
-    },
-  }
+  let attrs = {}
+  let scope = {}
   examplejs_print(processor('{{1 + 2}}', attrs, scope))
-  assert.equal(examplejs_printLines.join("\n"), "compile:3"); examplejs_printLines = [];
+  assert.equal(examplejs_printLines.join("\n"), "3"); examplejs_printLines = [];
   });
           
   it("processor():content is null", function () {

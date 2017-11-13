@@ -10,10 +10,6 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
    * 扩展函数
    */
   extend?: string
-  /**
-   * 是否重新编译，默认为需要
-   */
-  rework?: string
 }
 /**
  * artTemplate 模板渲染
@@ -39,14 +35,11 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
         age: 13
       `
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  // > compile:<b>tom - 13</b>
+  // > <b>tom - 13</b>
   ```
- * @example processor():execImport is object & rework is No
+ * @example processor():execImport is object
   ```js
   let attrs = {
     data: '#name',
@@ -59,27 +52,16 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
         age: 13,
       }
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
   // > <b>tom - 13</b>
   ```
  * @example processor():data is undefined
   ```js
-  let attrs = {
-  }
-  let scope = {
-    execImport: function (importion) {
-      return importion
-    },
-    compile: function (content) {
-      return 'compile:' + content
-    },
-  }
+  let attrs = {}
+  let scope = {}
   console.log(processor('{{1 + 2}}', attrs, scope))
-  // > compile:3
+  // > 3
   ```
  * @example processor():content is null
   ```js
@@ -99,9 +81,5 @@ export = (function (content: string, attrs: IArtTemplateAttrs, scope: jdistsUtil
       data = jsyaml.safeLoad(data)
     }
   }
-  if (jdistsUtil.isNo(attrs.rework)) {
-    return render(data)
-  } else {
-    return scope.compile(render(data))
-  }
+  return render(data)
 }) as jdistsUtil.IProcessor
