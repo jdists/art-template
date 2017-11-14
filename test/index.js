@@ -33,7 +33,6 @@ describe("src/index.ts", function () {
     examplejs_printLines = [];
   let attrs = {
     data: '#name',
-    rework: 'No'
   }
   let scope = {
     execImport: function (importion) {

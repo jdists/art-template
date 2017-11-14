@@ -7,10 +7,6 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
    * 数据来源
    */
   data?: string
-  /**
-   * 扩展函数
-   */
-  extend?: string
 }
 
 /**
@@ -19,8 +15,6 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
  * @param content 文本内容
  * @param attrs 属性
  * @param attrs.data 数据项，支持 JSON 和 YAML
- * @param attrs.extend 扩展函数
- * @param attrs.rework 是否重新编译
  * @param scope 作用域
  * @param scope.execImport 导入数据
  * @param scope.compile 编译 jdists 文本
@@ -45,7 +39,6 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
   ```js
   let attrs = {
     data: '#name',
-    rework: 'No'
   }
   let scope = {
     execImport: function (importion) {

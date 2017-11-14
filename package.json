@@ -1,6 +1,6 @@
 {
   "name": "@jdists/art-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "artTemplate as jdists processor",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
