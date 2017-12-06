@@ -1,6 +1,5 @@
 import * as artTemplate from 'art-template'
 import * as jdistsUtil from 'jdists-util'
-import * as jsyaml from 'js-yaml'
 interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
   /**
    * 数据来源
@@ -18,22 +17,6 @@ interface IArtTemplateAttrs extends jdistsUtil.IAttrs {
  * @param scope.compile 编译 jdists 文本
  * @return 返回渲染后的结果
  * @example processor():base
-  ```js
-  let attrs = {
-    data: '#name'
-  }
-  let scope = {
-    execImport: function (importion) {
-      return `
-        name: tom
-        age: 13
-      `
-    },
-  }
-  console.log(processor('<b>{{name}} - {{age}}</b>', attrs, scope))
-  // > <b>tom - 13</b>
-  ```
- * @example processor():execImport is object
   ```js
   let attrs = {
     data: '#name',
@@ -70,9 +53,6 @@ export = (function (content: string, attrs: IArtTemplateAttrs, scope: jdistsUtil
   let data = null
   if (attrs.data) {
     data = scope.execImport(attrs.data)
-    if (typeof data === 'string') {
-      data = jsyaml.safeLoad(data)
-    }
   }
   return render(data)
 }) as jdistsUtil.IProcessor
